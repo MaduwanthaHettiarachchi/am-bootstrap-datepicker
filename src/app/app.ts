@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
+import { Datepicker } from "./shared/datepicker/datepicker";
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [Datepicker],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

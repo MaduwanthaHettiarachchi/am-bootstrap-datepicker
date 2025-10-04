@@ -1,0 +1,25 @@
+<!-- Desktop: Angular Material datepicker -->
+<ng-container *ngIf="!useNative; else nativeTpl">
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" [formControl]="dateControl" placeholder="Pick a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <!-- touchUi true makes the picker fullscreen-friendly on touch if it does open -->
+    <mat-datepicker #picker [touchUi]="true"></mat-datepicker>
+  </mat-form-field>
+</ng-container>
+
+<!-- Mobile / touch: native date input (shows OS picker) -->
+<ng-template #nativeTpl>
+  <div class="mb-3">
+    <label for="nativeDate" class="form-label">Choose a date</label>
+    <input id="nativeDate"
+           class="form-control"
+           type="date"
+           [value]="nativeValue"
+           (change)="onNativeChange($event.target.value)">
+  </div>
+</ng-template>
+
+<!-- debug / display -->
+<p class="small text-muted">Model value: {{ dateControl.value | json }}</p>
