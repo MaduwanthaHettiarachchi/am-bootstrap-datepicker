@@ -1,0 +1,36 @@
+<!-- Desktop: Angular Material -->
+<ng-container *ngIf="!useNative; else nativeTpl">
+  <mat-form-field [appearance]="appearance" class="w-100">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [min]="minDate"
+      [max]="maxDate"
+      [value]="value"
+      (dateChange)="onMaterialChange($event.value)"
+      (blur)="onTouchedFn()"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker [touchUi]="true"></mat-datepicker>
+  </mat-form-field>
+</ng-container>
+
+<!-- Mobile: Native picker -->
+<ng-template #nativeTpl>
+  <div class="mb-3">
+    <label class="form-label">{{ label }}</label>
+    <input
+      class="form-control"
+      type="date"
+      [value]="nativeValue"
+      [disabled]="disabled"
+      [attr.min]="minDate ? (minDate | date:'yyyy-MM-dd') : null"
+      [attr.max]="maxDate ? (maxDate | date:'yyyy-MM-dd') : null"
+      (change)="onNativeChange($event.target.value)"
+      (blur)="onTouchedFn()"
+    />
+  </div>
+</ng-template>
